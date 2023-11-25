@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CoinsListTile extends StatelessWidget {
-  const CoinsListTile({
-    super.key,
-    required this.coinName,
-  });
-
   final String coinName;
+
+  const CoinsListTile({
+    Key? key,
+    required this.coinName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
