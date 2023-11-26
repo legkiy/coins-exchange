@@ -12,7 +12,7 @@ class CoinsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
-    final coinPriceRound = coin.priceUSD.toStringAsFixed(2);
+    final coinPriceRound = coin.priceUSD.toStringAsFixed(4);
 
     return ListTile(
       leading: Image.network(
