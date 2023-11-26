@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const primoryColor = Color.fromARGB(255, 190, 255, 68);
 final datrkTheme = ThemeData(
   appBarTheme: AppBarTheme(
+      elevation: 0,
       backgroundColor: Colors.grey[700],
       shadowColor: Colors.grey[700],
       titleTextStyle: const TextStyle(

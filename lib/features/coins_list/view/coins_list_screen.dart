@@ -17,33 +17,49 @@ class _CoinsListScreenState extends State<CoinsListScreen> {
   List<CryptoCoinModel>? _cryptoCoinsList;
 
   @override
+  void initState() {
+    _loadCoinsList();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(widget.title),
       ),
       body: _cryptoCoinsList == null
-          ? const SizedBox()
+          ? Center(
+              child: CircularProgressIndicator(
+                  color: theme.floatingActionButtonTheme.backgroundColor),
+            )
           : ListView.separated(
               separatorBuilder: (context, index) => Divider(
                 color: theme.dividerColor,
               ),
+              padding: const EdgeInsets.only(top: 10),
               itemCount: _cryptoCoinsList!.length,
               itemBuilder: (context, index) {
                 final coin = _cryptoCoinsList![index];
-                final coinName = coin.name;
 
-                return CoinsListTile(coinName: coinName);
+                return CoinsListTile(
+                  coin: coin,
+                );
               },
             ),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.refresh_outlined),
           onPressed: () async {
-            _cryptoCoinsList = await CryptoCoinsRepository().getCoinsList();
-            setState(() {});
+            await _loadCoinsList();
           }),
     );
+  }
+
+  Future<void> _loadCoinsList() async {
+    _cryptoCoinsList = await CryptoCoinsRepository().getCoinsList();
+    setState(() {});
   }
 }
